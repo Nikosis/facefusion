@@ -22,8 +22,8 @@ jobs:
  test:
   strategy:
    matrix:
-    group-index: [ 1, 2, 3, 4, 5 ]
     os: [ macos-13, ubuntu-latest, windows-latest ]
+    group-index: [ 1, 2, 3, 4 ]
   runs-on: ${{ matrix.os }}
   steps:
   - name: Checkout
@@ -37,7 +37,7 @@ jobs:
   - run: python install.py --onnxruntime default --skip-conda
   - run: pip install pytest
   - run: pip install pytest-split
-  - run: pytest --splits 5 --group ${{ matrix.group-index }}
+  - run: pytest --splits 4 --group ${{ matrix.group-index }}
  report:
   needs: test
   runs-on: ubuntu-latest
